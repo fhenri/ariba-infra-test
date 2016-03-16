@@ -5,4 +5,5 @@ cd /home/ariba/pws_test && git checkout TST_Serenity
 cd /home/ariba/pws_test && gradle build
 
 cd /home/ariba/pws_test && gradle aggregate
-cp -R /home/ariba/pws_test/target/site/serenity /vagrant
+DATE=`date +%Y-%m-%d`
+cp -R /home/ariba/pws_test/target/site/serenity /vagrant/$DATE
