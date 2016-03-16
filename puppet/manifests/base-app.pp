@@ -113,11 +113,11 @@ class ariba {
 
     "/home/ariba/.ssh/config":
       mode    => 0600,
-      content => "$ARIBA_INST/ssh/config";
+      source  => "$ARIBA_INST/ssh/config";
 
     "/home/ariba/.ssh/id_rsa":
       mode    => 0600,
-      content => "$ARIBA_INST/ssh/id_rsa";
+      source  => "$ARIBA_INST/ssh/id_rsa";
   }
 
   file_line { 
