@@ -9,13 +9,21 @@ class { 'java' :
     java_alternative_path => '/usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java'
 }
   
-class gradle_install {
+class tools_install {
   require java
 
   package {
     ['unzip', 'git']:
       ensure => installed;
   }
+
+  file {
+    "/home/ariba/selenium-server-standalone-2.50.1.jar":
+      ensure  => "file",
+      mode    => 0755,
+      owner   => ariba,
+      source  => "/vagrant/puppet/install_ariba/test/selenium-server-standalone-2.50.1.jar";
+  } 
 
   class { 'gradle':
     version => '2.2',
@@ -24,4 +32,4 @@ class gradle_install {
 }
 
 include java
-include gradle_install
+include tools_install

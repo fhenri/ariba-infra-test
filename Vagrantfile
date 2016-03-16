@@ -51,6 +51,7 @@ Vagrant.configure("2") do |config|
       puppet.hiera_config_path = "puppet/hiera.yaml"
       #puppet.options = "--verbose --debug"
     end
+    app.vm.provision "shell", path: "puppet/script/run-ariba-app.sh", privileged: false, run: 'always'
   end
 
   config.vm.define "hub" do |hub|
@@ -69,6 +70,7 @@ Vagrant.configure("2") do |config|
       puppet.hiera_config_path = "puppet/hiera.yaml"
       #puppet.options = "--verbose --debug"
     end
+    hub.vm.provision "shell", path: "puppet/script/run-test.sh", privileged: false, run: 'always'
   end
 
   config.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime", :run => 'always'

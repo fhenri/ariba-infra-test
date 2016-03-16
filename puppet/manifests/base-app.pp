@@ -7,6 +7,11 @@ class { 'apache': }
 #necessary for ariba installation from command line
 class { 'perl': }
 
+class { 'java' : 
+  distribution  => 'jdk',
+  package       => 'java-1.8.0-openjdk-devel'
+}
+
 # ant comes as package from ariba install with version 1.7
 # dependencies install java 1.6 so java 1.8 is installed after ariba as part 
 # of another package
@@ -16,6 +21,7 @@ class { 'perl': }
 
 class ariba {
   require perl
+  require java
 
   $ARIBA_HOST     = hiera('ariba_hostname')
   $ARIBA_DB_HOST  = hiera('db_hostname')
@@ -47,18 +53,6 @@ class ariba {
   File {
     ensure  => 'file',
     owner   => $ARIBA_USER,
-  }
-
-  # check if we have jrebel directory - then copy
-  $jrebel = file("$ARIBA_INST/jrebel/jrebel.jar",'/dev/null')
-  if($jrebel != '') {
-      file { "$ARIBA_ROOT/jrebel":
-        ensure  => 'directory',
-        source  => "$ARIBA_INST/jrebel",
-        recurse => 'remote',
-        purge   => true,
-        replace => "yes";
-      }
   }
 
   # check if we have a weblogic-defaultconfig.xml - used for multi node configuration
@@ -116,6 +110,20 @@ class ariba {
       mode    => 0777,
       owner   => root,
       source  => "$ARIBA_INST/Weblogic/mod_wl.so";
+
+    "/home/ariba/.ssh/config":
+      mode    => 0600,
+      content => "$ARIBA_INST/ssh/config";
+
+    "/home/ariba/.ssh/id_rsa":
+      mode    => 0600,
+      content => "$ARIBA_INST/ssh/id_rsa";
+  }
+
+  file_line { 
+    'authorized_keys':
+       path => '/home/ariba/.ssh/authorized_keys',
+       line => 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6rbHB03+zVZ8GHCiYwWL1a4+1bOnvKPqEcI3mXOQc7RXlUo8oi/xHe1K/FPpqC+NFea9rqzwdgiCWnVKVxykt9xvN4XJeSroOTk66on7Ss5ZYXLhkSo0/RakfZ3dmXjLoUk7xZmsSQZdwkPQeb7M6nJf+T3VGKwahK5coaAIt8QD1AOfMn3rWwy5bzHi0+yTkB3WMFGhfUTINuKw8adRajLiNUB8qUEfjT6or8N39CYTtsEY3twgvy0+I6Uo30z5fqIaBTKerJZ/6B5rjmIck69rGzhue9eb+fbEZmULjQa5VWjNKut5qJ2FLpAFi8BsekDaYmJowXz79DK4eZfAx powersource-key',
   }
 
   exec {
@@ -190,3 +198,4 @@ class ariba {
 include apache
 include perl
 include ariba
+include java
