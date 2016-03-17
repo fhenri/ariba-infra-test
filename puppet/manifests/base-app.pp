@@ -9,7 +9,7 @@ class { 'perl': }
 
 class { 'java' : 
   distribution  => 'jdk',
-  package       => 'java-1.8.0-openjdk-devel'
+  package       => 'java-1.6.0-openjdk-devel'
 }
 
 # ant comes as package from ariba install with version 1.7
