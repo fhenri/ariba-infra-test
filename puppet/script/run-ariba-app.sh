@@ -1,4 +1,6 @@
-if [ -d "/home/ariba/pws_sources"];then
+#!/bin/bash
+
+if [ -d "/home/ariba/pws_sources" ];then
     cd /home/ariba/pws_sources && git pull
     cd /home/ariba/pws_sources && ant amazon
 else
