@@ -29,13 +29,13 @@ asm.group=
 server1.name=asmserver1
 server1.port=8000
 server1.initialheap=256
-server1.maxheap=512
-server1.addtl-mem-args=-Xss1m -XX:MaxPermSize=256M -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -noverify
+server1.maxheap=1024
+server1.addtl-mem-args=-Xss1m -XX:MaxPermSize=512M
 server2.name=asmserver2
 server2.port=8004
 server2.initialheap=256
-server2.maxheap=512
-server2.addtl-mem-args=-Xss1m -XX:MaxPermSize=256M
+server2.maxheap=1024
+server2.addtl-mem-args=-Xss1m -XX:MaxPermSize=512M
 sourcing.configure.customize.webserverport=80
 sourcing.configure.customize.webserverhostname=<%= @ARIBA_HOST %>
 sourcing.configure.freshconfig=true

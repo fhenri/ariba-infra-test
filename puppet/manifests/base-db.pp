@@ -66,22 +66,22 @@ class oracledb {
 
   exec {
     'run-script':
-      command => "bash -c 'source /etc/profile.d/ora.sh && sqlplus system/oracle@aribadb @aribadb.sql'",
-      cwd     => '/home/oracle',
-      path    => '/usr/bin:/bin:/oracle/app/oracle/product/11.2.0/dbhome_1/bin',
-      user    => oracle,
+      command   => "bash -c 'source /etc/profile.d/ora.sh && sqlplus system/oracle@aribadb @aribadb.sql'",
+      cwd       => '/home/oracle',
+      path      => '/usr/bin:/bin:/oracle/app/oracle/product/11.2.0/dbhome_1/bin',
+      user      => oracle,
       logoutput => on_failure,
-      require => File["/home/oracle/aribadb.sql"];
+      require   => File["/home/oracle/aribadb.sql"];
 	  
 	 'import-dump':
-      command => "bash -c 'source /etc/profile.d/ora.sh && impdp system/oracle@aribadb metrics=y DIRECTORY=imp_dir dumpfile=CHG0541492_alstomsource_1_%u.dmp LOGFILE=import-dump.log'",
-	  cwd     => '/home/oracle',
-      path    => '/usr/bin:/bin:/oracle/app/oracle/product/11.2.0/dbhome_1/bin',
-      user    => oracle,
-	  timeout     => 7200,
-	  returns => [0, 1, 5],
-	  logoutput => on_failure,
-      require => Exec["run-script"];
+      command    => "bash -c 'source /etc/profile.d/ora.sh && nohup impdp system/oracle@aribadb metrics=y DIRECTORY=imp_dir dumpfile=CHG0541492_alstomsource_1_%u.dmp LOGFILE=import-dump.log &'",
+	    cwd        => '/home/oracle',
+      path       => '/usr/bin:/bin:/oracle/app/oracle/product/11.2.0/dbhome_1/bin',
+      user       => oracle,
+	    timeout    => 7200,
+	    returns    => [0, 1, 5],
+	    logoutput  => on_failure,
+      require    => Exec["run-script"];
   }
 
 }
