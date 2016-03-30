@@ -19,6 +19,10 @@ Vagrant.configure("2") do |config|
       vm.vmx["memsize"] = "3072"
     end
 
+    db.vm.provider "virtualbox" do |vb|
+      vb.memory = "3072"
+    end
+
     db.vm.provision "shell", path: "puppet/script/install-puppet-modules-db.sh"
     db.vm.provision :puppet do |puppet|
       puppet.manifests_path = "puppet/manifests"
@@ -27,6 +31,7 @@ Vagrant.configure("2") do |config|
       puppet.hiera_config_path = "puppet/hiera.yaml"
       #puppet.options = "--verbose --debug"
     end
+    db.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime", :run => 'always'
   end
 
   config.vm.define "app", primary: true do |app|
@@ -44,6 +49,10 @@ Vagrant.configure("2") do |config|
       vm.vmx["memsize"] = "4096"
     end
 
+    app.vm.provider "virtualbox" do |vb|
+      vb.memory = "3072"
+    end
+
     app.vm.provision "shell", path: "puppet/script/install-puppet-modules-app.sh"
     app.vm.provision :puppet do |puppet|
       puppet.manifests_path = "puppet/manifests"
@@ -53,6 +62,12 @@ Vagrant.configure("2") do |config|
       #puppet.options = "--verbose --debug"
     end
     app.vm.provision "shell", path: "puppet/script/run-ariba-app.sh", privileged: false, run: 'always'
+    app.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime", :run => 'always'
+  end
+
+  config.vm.define "win_10" do |win10|
+    win10.vm.box = "windows_10"
+    win10.vm.network "private_network", ip: settings['host_win1_address']
   end
 
   config.vm.define "hub" do |hub|
@@ -61,6 +76,10 @@ Vagrant.configure("2") do |config|
 
     hub.vm.provider "vmware_fusion" do |vm|
       vm.vmx["memsize"] = "1024"
+    end
+
+    hub.vm.provider "virtualbox" do |vb|
+      vb.memory = "3072"
     end
 
     hub.vm.provision "shell", path: "puppet/script/install-puppet-modules-hub.sh"
@@ -72,7 +91,6 @@ Vagrant.configure("2") do |config|
       #puppet.options = "--verbose --debug"
     end
     hub.vm.provision "shell", path: "puppet/script/run-test.sh", privileged: false, run: 'always'
+    hub.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime", :run => 'always'
   end
-
-  config.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime", :run => 'always'
 end

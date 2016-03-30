@@ -4,6 +4,10 @@ if [ -d "/home/ariba/pws_test" ];then
     cd /home/ariba && nohup java -jar selenium-server-standalone-2.50.1.jar -role hub &> /home/ariba/nohup.grid.out&
     
     cd /home/ariba/pws_test && git pull
+
+    echo "sleeping for 10 minutes .. time for Ariba to start up"
+    sleep 600
+
     cd /home/ariba/pws_test && gradle build
 
     cd /home/ariba/pws_test && gradle aggregate

@@ -1,14 +1,16 @@
 ---
-host_db_address:  "192.168.90.51"
-host_app_address: "192.168.90.52"
-host_hub_address: "192.168.90.53"
+host_db_address:    "192.168.90.51"
+host_app_address:   "192.168.90.52"
+host_hub_address:   "192.168.90.53"
 
-hub_hostname:     "aribatest.hub"
+host_win1_address:  "192.168.90.61"
 
-db_hostname:      "aribatest.db"
+hub_hostname:       "aribatest.hub"
 
-ariba_user:       "ariba"
-ariba_hostname:   "aribatest.app"
-ariba_version:    "9r2"
-ariba_sp:         "sourcing_9.2_sp9.jar"
+db_hostname:        "aribatest.db"
+
+ariba_user:         "ariba"
+ariba_hostname:     "aribatest.app"
+ariba_version:      "9r2"
+ariba_sp:           "sourcing_9.2_sp9.jar"
 
