@@ -14,3 +14,4 @@ ariba_hostname:     "pws.app"
 ariba_version:      "9r2"
 ariba_sp:           "sourcing_9.2_sp9.jar"
 
+selenium_version:   "2.50.1"

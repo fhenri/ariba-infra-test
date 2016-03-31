@@ -18,11 +18,6 @@ class tools_install {
   }
 
   file {
-    "/home/ariba/selenium-server-standalone-2.50.1.jar":
-      ensure  => "file",
-      mode    => 0755,
-      owner   => ariba,
-      source  => "/vagrant/puppet/install_ariba/test/selenium-server-standalone-2.50.1.jar";
 
     "/home/ariba/.ssh/config":
       mode    => 0600,

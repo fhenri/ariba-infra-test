@@ -1,0 +1,1 @@
+start /min Java -jar C:\test\selenium-server-standalone-%1.jar -role node -port 6666 -hub http://192.168.90.53:4444/grid/register/ -browser browserName="firefox"
