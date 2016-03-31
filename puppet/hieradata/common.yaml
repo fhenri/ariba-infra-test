@@ -5,12 +5,12 @@ host_hub_address:   "192.168.90.53"
 
 host_win1_address:  "192.168.90.61"
 
-hub_hostname:       "aribatest.hub"
-
-db_hostname:        "aribatest.db"
-
 ariba_user:         "ariba"
-ariba_hostname:     "aribatest.app"
+
+hub_hostname:       "pws.hub"
+db_hostname:        "pws.db"
+ariba_hostname:     "pws.app"
+
 ariba_version:      "9r2"
 ariba_sp:           "sourcing_9.2_sp9.jar"
 

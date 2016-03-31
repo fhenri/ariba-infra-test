@@ -75,7 +75,7 @@ class oracledb {
 	 
    # make root running this as a hack for virtual box sharing folder where oracle would not have access to /dump folder 
 	 'import-dump':
-      command    => "bash -c 'source /etc/profile.d/ora.sh && nohup impdp system/oracle@aribadb metrics=y DIRECTORY=imp_dir dumpfile=CHG0541492_alstomsource_1_%u.dmp LOGFILE=/home/oracle/import-dump.log &'",
+      command    => "bash -c 'source /etc/profile.d/ora.sh && nohup impdp system/oracle@aribadb metrics=y DIRECTORY=imp_dir dumpfile=CHG0541492_alstomsource_1_%u.dmp LOGFILE=import-dump.log &'",
 	    cwd        => '/home/oracle',
       path       => '/usr/bin:/bin:/oracle/app/oracle/product/11.2.0/dbhome_1/bin',
       user       => oracle,
