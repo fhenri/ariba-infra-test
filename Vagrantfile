@@ -21,6 +21,10 @@ Vagrant.configure("2") do |config|
       vm.vmx["memsize"] = "3072"
     end
 
+    db.vm.provider "vmware_workstation" do |vm|
+      vm.vmx["memsize"] = "3072"
+    end
+
     db.vm.provider "virtualbox" do |vb|
       vb.memory = "3072"
     end
@@ -45,9 +49,10 @@ Vagrant.configure("2") do |config|
     app.ssh.forward_x11 = true
 
     app.vm.provider "vmware_fusion" do |vm|
-      # Don't boot with headless mode
-      #vm.gui = true
-   
+      vm.vmx["memsize"] = "4096"
+    end
+
+    app.vm.provider "vmware_workstation" do |vm|
       vm.vmx["memsize"] = "4096"
     end
 
@@ -88,6 +93,10 @@ Vagrant.configure("2") do |config|
     hub.vm.network "private_network", ip: settings['host_hub_address']
 
     hub.vm.provider "vmware_fusion" do |vm|
+      vm.vmx["memsize"] = "1024"
+    end
+
+    hub.vm.provider "vmware_workstation" do |vm|
       vm.vmx["memsize"] = "1024"
     end
 
