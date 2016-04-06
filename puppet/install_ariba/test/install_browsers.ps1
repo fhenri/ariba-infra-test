@@ -11,6 +11,11 @@ function CheckLocation {
         throw [System.IO.FileNotFoundException] "Could not download to Destination $location."
     }
 }
+
+function add-host([string]$ip, [string]$hostname) {
+    $hostsPath = "$env:windir\System32\drivers\etc\hosts"
+    $ip + "`t`t" + $hostname | Out-File -encoding ASCII -append $hostsPath
+}
  
 $Logfile = "C:\Windows\Temp\chrome-firefox-install.log"
 
@@ -35,6 +40,8 @@ try {
     LogWrite 'Exception during install process.'
     LogWrite '$_.Exception is' $_.Exception
 }
-LogWrite 'Starting chrome install process.'
- 
+
+LogWrite 'Update hostfile'
+add-host "192.168.90.52" "pws.app"
+
 LogWrite 'All done. Goodbye.'

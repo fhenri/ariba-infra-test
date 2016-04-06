@@ -72,6 +72,6 @@ if ((Test-Path "c:\Program Files (x86)\Java") -Or (Test-Path "c:\Program Files\J
     LogWrite 'Java install Failed!'
 }
 LogWrite 'Setting up Path variables.'
-[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "c:\Program Files (x86)\Java\jdk$JDK_PATH", "Machine")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";c:\Program Files (x86)\Java\jdk$JDK_PATH\bin", "Machine")
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "c:\Program Files\Java\jdk$JDK_PATH", "Machine")
+[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";c:\Program Files\Java\jdk$JDK_PATH\bin", "Machine")
 LogWrite 'Done. Goodbye.'

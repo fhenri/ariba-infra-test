@@ -78,10 +78,10 @@ Vagrant.configure("2") do |config|
 
     win10.vm.synced_folder "puppet/install_ariba/test", "/test"
 
-    win10.vm.provision "shell", path: "puppet/install_ariba/test/install_win_jdk.ps1"
-    win10.vm.provision "shell", path: "puppet/install_ariba/test/install_browsers.ps1"
+    #win10.vm.provision "shell", path: "puppet/install_ariba/test/install_win_jdk.ps1"
+    #win10.vm.provision "shell", path: "puppet/install_ariba/test/install_browsers.ps1"
 
-    win10.vm.provision "shell", path: "puppet/install_ariba/test/start_win_selenium.bat", run: 'always', args: "#{selenium_version}"
+    win10.vm.provision "shell", path: "puppet/install_ariba/test/start_win_selenium.bat", run: 'always', args: ["#{selenium_version}", settings['host_hub_address']]
     #win10.vm.provision "shell", path: "vagrant-shell.ps1", run: 'always'
     #win10.vm.provision "shell", inline: "Start-Job { & java -jar C:\\test\\selenium-server-standalone-2.50.1.jar -role node -port 6666 -hub http://192.168.90.53:4444/grid/register/ -browser browserName=\"firefox\" }", run: 'always'
     #win10.vm.provision "shell", inline: "java -jar C:\\test\\selenium-server-standalone-2.50.1.jar -role node -port 6666 -hub http://192.168.90.53:4444/grid/register/ -browser browserName=\"firefox\"", run: 'always'
@@ -114,7 +114,6 @@ Vagrant.configure("2") do |config|
       puppet.hiera_config_path = "puppet/hiera.yaml"
       #puppet.options = "--verbose --debug"
     end
-    p #{selenium_version}
     hub.vm.provision "shell", path: "puppet/script/run-test.sh", privileged: false, run: 'always', args: "#{selenium_version}"
     hub.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime", :run => 'always'
   end
