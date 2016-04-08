@@ -74,7 +74,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "win_10" do |win10|
     win10.vm.box = "windows_10"
-    win10.vm.network "private_network", ip: settings['host_win1_address']
 
     win10.vm.synced_folder "puppet/install_ariba/test", "/test"
 
