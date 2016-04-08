@@ -6,7 +6,7 @@ if [ -d "/home/ariba/pws_test" ];then
     cd /home/ariba/pws_test && git pull
 
     echo "sleeping for 10 minutes .. time for Ariba to start up"
-    #sleep 600
+    sleep 600
 
     cd /home/ariba/pws_test && gradle build
 
