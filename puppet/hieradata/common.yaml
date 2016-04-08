@@ -3,8 +3,6 @@ host_db_address:    "192.168.90.51"
 host_app_address:   "192.168.90.52"
 host_hub_address:   "192.168.90.53"
 
-host_win1_address:  "192.168.90.61"
-
 ariba_user:         "ariba"
 
 hub_hostname:       "pws.hub"
