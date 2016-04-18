@@ -15,7 +15,7 @@ if [ -d "/home/ariba/pws_test" ];then
     cp -R /home/ariba/pws_test/target/site/serenity /vagrant/$DATE
     cd /home/ariba/pws_test && gradle clean
 else
-    git clone git@bitbucket.org:fhenri/powersource.git /home/ariba/pws_test
+    git clone git@bitbucket.org:fhenri/pws.test.git /home/ariba/pws_test
     cd /home/ariba/pws_test && git checkout TST_Serenity
     cd /home/ariba/pws_test && gradle assemble
 fi
