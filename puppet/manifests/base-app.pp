@@ -106,16 +106,11 @@ class ariba {
       owner   => root,
       content => template("$ARIBA_INST/properties/ariba.conf.erb");
 
-    "/etc/httpd/modules/mod_wl.so":
-      mode    => 0777,
-      owner   => root,
-      source  => "$ARIBA_INST/Weblogic/mod_wl.so";
-
-    "/home/ariba/.ssh/config":
+    "$ARIBA_ROOT/.ssh/config":
       mode    => 0600,
       source  => "$ARIBA_INST/ssh/config";
 
-    "/home/ariba/.ssh/id_rsa":
+    "$ARIBA_ROOT/.ssh/id_rsa":
       mode    => 0600,
       source  => "$ARIBA_INST/ssh/id_rsa";
   }
