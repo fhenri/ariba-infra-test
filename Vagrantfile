@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 require 'yaml'
-settings = YAML.load_file 'puppet/hieradata/common.yaml'
+settings = YAML.load_file File.join(File.dirname(__FILE__), "puppet/hieradata/common.yaml")
 
 selenium_version = settings['selenium_version']
 
